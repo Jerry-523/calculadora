@@ -1,6 +1,14 @@
 # calculadora
 ![calculadora](https://github.com/Jerry-523/calculadora/assets/92488227/154684c5-c3ba-4c7f-8198-539344b89b80)
 
+## To do
+
+- [ ] Logic functions;
+
+- [ ] Math functions;
+
+- [x] Interface
+
 
 A new Flutter project.
 
