@@ -3,11 +3,11 @@
 
 ## To do
 
-- [ ] Logic functions;
+- [x] Logic functions;
 
-- [ ] Math functions;
+- [x] Math functions;
 
-- [x] Interface
+- [x] Interface;
 
 
 
