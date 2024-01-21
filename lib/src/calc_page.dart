@@ -1,3 +1,4 @@
+import 'package:calculadora/src/controllers/calc_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/button_hub.dart';
@@ -11,18 +12,41 @@ class CalcPage extends StatefulWidget {
 }
 
 class _CalcPageState extends State<CalcPage> {
+
+  final controller = CalcController();
+
+  void _listenner(){
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    controller.addListener(_listenner);
+  }
+
+  @override
+  void dispose(){
+    controller.removeListener(_listenner);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context){
-    return const Material(
+    return Material(
       child: Column(
         children: [
           Expanded(
             flex: 1,
-            child: Display(value: '100'),
+            child: Display(value: controller.display),
           ),
           Expanded(
             flex: 3,
-            child: ButtonHub(),
+            child: ButtonHub(
+              onButtonClick: controller.onButtonClick,
+            ),
           ),
         ],
       ),

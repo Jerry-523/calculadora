@@ -1,7 +1,36 @@
 import 'package:flutter/material.dart';
 
+sealed class ButtonClick {
+  final String value;
+
+  ButtonClick(this.value);
+}
+
+class CommonButtonClick extends ButtonClick {
+  CommonButtonClick(super.value);
+}
+
+class EqualsButtonClick extends ButtonClick {
+  EqualsButtonClick(super.value);
+}
+
+class ClearButtonClick extends ButtonClick {
+  ClearButtonClick(super.value);
+}
+
+class DelButtonClick extends ButtonClick {
+  DelButtonClick(super.value);
+}
+
+class ClearEntryButtonClick extends ButtonClick {
+  ClearEntryButtonClick(super.value);
+}
+
 class ButtonHub extends StatelessWidget {
-  const ButtonHub({super.key});
+
+  final void Function(ButtonClick click)? onButtonClick;
+
+  const ButtonHub({super.key, required this.onButtonClick});
 
   @override
   Widget build(BuildContext context){
@@ -12,92 +41,131 @@ class ButtonHub extends StatelessWidget {
       mainAxisSpacing: 10,
       crossAxisCount: 4,
       children: <Widget>[
-        Container(
-          child: Button(color: Colors.indigo, value: '%',)
+        Button(
+          color: Colors.indigo,
+          value: '%',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.indigo, value: 'CE',)
+        Button(
+          color: Colors.indigo,
+          value: 'CE',
+          onTap: (value) => onButtonClick!(ClearEntryButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.indigo, value: 'C',)
+        Button(
+          color: Colors.indigo,
+          value: 'C',
+          onTap: (value) => onButtonClick!(ClearButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.indigo[800], value: '',)
+        Button(
+          color: Colors.indigo[800],
+          icon: const Icon(Icons.clear),
+          value: '️⬅️',
+          onTap: (value) => onButtonClick!(DelButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.blue[500], value: '7',)
+        Button(
+          color: Colors.blue[500],
+          value: '7',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '8',)
+        Button(
+          color: Colors.blue,
+          value: '8',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '9',)
+        Button(
+          color: Colors.blue,
+          value: '9', onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.indigo, value: '÷',)
+        Button(
+            color: Colors.indigo,
+            value: '/',
+            onTap: (value) => onButtonClick!(CommonButtonClick(value))
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '4',)
+        Button(
+            color: Colors.blue,
+            value: '4',
+            onTap: (value) => onButtonClick!(CommonButtonClick(value))
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '5',)
+        Button(
+          color: Colors.blue,
+          value: '5',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '6',)
+        Button(
+          color: Colors.blue,
+          value: '6',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.indigo, value: 'x',)
+        Button(
+          color: Colors.indigo,
+          value: '*',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '1',)
+        Button(
+          color: Colors.blue,
+          value: '1',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '2',)
+        Button(
+          color: Colors.blue,
+          value: '2',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '3',)
+        Button(
+          color: Colors.blue,
+          value: '3',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.indigo, value: '+',)
+        Button(
+          color: Colors.indigo,
+          value: '+',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.indigo, value: '-',)
+        Button(
+          color: Colors.indigo,
+          value: '-',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.blue, value: '0',)
+        Button(
+          color: Colors.blue,
+          value: '0',
+          onTap: (value) => onButtonClick!(CommonButtonClick(value))
         ),
-        Container(
-            child: Button(color: Colors.indigo, value: '.',)
+        Button(color: Colors.indigo, value: '.', onTap: (String value) {  },),
+        Button(
+          color: Colors.indigo[900],
+          value: '=',
+          onTap: (value) => onButtonClick!(EqualsButtonClick(value)),
         ),
-        Container(
-            child: Button(color: Colors.indigo[900], value: '=',)
-        ),
-      ],
+        ],
     );
   }
 }
 
 class Button extends StatelessWidget {
   final Color? color;
+  final Icon? icon;
   final void Function(String value) onTap;
   final String value;
-  const Button({super.key, required this.value, this.color, required this.onTap});
+  const Button({super.key, required this.value, this.color, required this.onTap, this.icon});
 
   @override
   Widget build(BuildContext context){
     final color = this.color ?? Theme.of(context).colorScheme.primary;
-    return InkWell(
-      onTap: onTap == null ? null : () => onTap!(value),
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        color: color,
-        child: Center(
-          child: Text(
-            value,
-            style: Theme.of(context).textTheme.displaySmall,
+    return Material(
+      color: color,
+      child: InkWell(
+        onTap: onTap == null ? null : () => onTap!(value),
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
           ),
         ),
-      ),
+      )
     );
   }
 }
