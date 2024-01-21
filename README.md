@@ -1,15 +1,5 @@
 # calculadora
-![calculadora](https://github.com/Jerry-523/calculadora/assets/92488227/154684c5-c3ba-4c7f-8198-539344b89b80)
-
-## To do
-
-- [x] Logic functions;
-
-- [x] Math functions;
-
-- [x] Interface;
-
-
+![calculadora-gif](https://github.com/Jerry-523/calculadora/assets/92488227/b3b9930e-555a-4d77-8e2a-a28cb717582d)
 
 
 ## Getting Started
